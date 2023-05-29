@@ -113,6 +113,8 @@ export default class MysqlDriver extends AbstractDriver {
                         resp.COLUMN_DEFAULT,
                         resp.DATA_TYPE
                     );
+                    if (["password", "init_password"].includes(tscName))
+                        options.select = false;
                     let columnType = resp.DATA_TYPE;
                     if (resp.IS_NULLABLE === "YES") options.nullable = true;
                     if (resp.COLUMN_KEY === "UNI") options.unique = true;

@@ -128,6 +128,8 @@ export default class PostgresDriver extends AbstractDriver {
                     };
                     if (resp.is_nullable === "YES") options.nullable = true;
                     if (resp.isunique === "1") options.unique = true;
+                    if (["password", "init_password"].includes(tscName))
+                        options.select = false;
 
                     const generated =
                         resp.isidentity === "YES" || resp.is_identity === "YES"
