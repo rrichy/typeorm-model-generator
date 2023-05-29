@@ -22,5 +22,6 @@ export type Column = {
         enum?: string[];
         array?: boolean; // ?
         comment?: string;
+        select?: boolean;
     };
 };

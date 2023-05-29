@@ -90,6 +90,8 @@ export default class SqliteDriver extends AbstractDriver {
                     let tscType = "";
                     const options: Column["options"] = { name: resp.name };
                     if (resp.notnull === 0) options.nullable = true;
+                    if (["password", "init_password"].includes(tscName))
+                        options.select = false;
                     const isPrimary = resp.pk > 0 ? true : undefined;
                     const defaultValue =
                         SqliteDriver.ReturnDefaultValueFunction(

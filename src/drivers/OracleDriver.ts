@@ -98,6 +98,8 @@ export default class OracleDriver extends AbstractDriver {
                     };
                     if (resp.NULLABLE === "Y") options.nullable = true;
                     if (resp.IS_UNIQUE > 0) options.unique = true;
+                    if (["password", "init_password"].includes(tscName))
+                        options.select = false;
                     const generated =
                         resp.IDENTITY_COLUMN === "YES" ? true : undefined;
                     const defaultValue =

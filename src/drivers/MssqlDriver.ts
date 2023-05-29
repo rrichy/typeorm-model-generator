@@ -122,6 +122,8 @@ export default class MssqlDriver extends AbstractDriver {
                     };
                     if (resp.IS_NULLABLE === "YES") options.nullable = true;
                     if (resp.IsUnique === 1) options.unique = true;
+                    if (["password", "init_password"].includes(tscName))
+                        options.select = false;
                     const generated = resp.IsIdentity === 1 ? true : undefined;
                     const defaultValue = MssqlDriver.ReturnDefaultValueFunction(
                         resp.COLUMN_DEFAULT
